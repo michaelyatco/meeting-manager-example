@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get '/meetings/new', to: 'meetings#new'
   post '/meetings', to: 'meetings#create'
   get '/meetings/:id' => 'meetings#show'
+  get '/meetings/:id/edit', to: 'meetings#edit'
+  patch '/meetings/:id', to: 'meetings#update'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
