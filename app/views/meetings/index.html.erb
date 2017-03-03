@@ -1,3 +1,7 @@
+<div ng-app="app">
+  {{ 1 + 1 }}
+  <div ng-controller="meetingsCtrl">
+    {{ message }}
 <a href="/meetings/new">Create a new meeting</a>
 <h1><a href="/meetings">All meetings</a></h1>
 <% @meetings.each do |meeting| %>
@@ -13,3 +17,6 @@
   <p>Start time: <%= meeting.start_time %></p>
   <p>End time: <%= meeting.end_time %></p>
 <% end %>
+
+  </div>
+</div>
