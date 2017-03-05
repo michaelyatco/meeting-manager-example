@@ -1,21 +1,38 @@
 <div ng-app="app">
-  {{ 1 + 1 }}
   <div ng-controller="meetingsCtrl" ng-init="setup()"">
-    {{ message }}
-<a href="/meetings/new">Create a new meeting</a>
+    <div>
+      <h4> Total number of meetings: {{ meetings.length }}</h4>
+    </div>
+<!-- <a href="/meetings/new">Create a new meeting</a> -->
+
+    <input ng-model="meetingFilter" list="meetings">
+
+    <datalist id="meetings">
+      <option ng-repeat="meeting in meetings">{{ meeting.name }}</option>
+    </datalist>
+
+    <div>
+      <button ng-click="sortBy('name')">Order by name</button>
+      <button ng-click="sortBy('start_time')">Order by start time</button>
+    </div>  
+
+
 <h1><a href="/meetings">All meetings</a></h1>
-<div ng-repeat="meeting in meetings">
-  <h3><a href="/meetings/{{ meeting.id }}"><{{ meeting.name }}></a></h3>
+<div ng-repeat="meeting in meetings | filter: {name: meetingFilter} | orderBy:orderAttribute:descending">
+  <h3><a href="/meetings/{{ meeting.id }}">{{ meeting.name }}</a></h3>
   <h3><a href="/meetings/{{ meeting.id }}/edit">Edit Meeting</a></h3>
   <p>
     Tags:
     <div ng-repeat="tag in meetings.tags">
-      <a href="/meetings?tag=<{{ tag.name }}%>"><{{ tag.name }} ></a>  
+      <a href="/meetings?tag=<{{ tag.name }}%>">{{ tag.name }} </a>  
     </div>
   </p>
-  <p>Address: <{{ meeting.address }}></p>
-  <p>Start time: <{{ meeting.start_time }}></p>
-  <p>End time: <{{ meeting.end_time }}></p>
-    </div>>
+    <p>Address: {{ meeting.address }}</p>
+    <p>Start time: {{ meeting.start_time }}</p>
+    <p>End time: {{ meeting.end_time }}</p>
+    </div>
+    <p>First Name: <input ng-model="inputName"></p>
+    <p>Address: <input ng-model="inputAddress"></p>
+    <button ng-click="addMeeting(inputName, inputAddress)"> Add new meeting </button>
   </div>
 </div>
